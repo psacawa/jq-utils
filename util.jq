@@ -10,10 +10,11 @@
 
 
 # wyemituj posortowaną listę wartości wraz z liczbą ich pojawień 
-# TODO 15/06/20 psacawa: wdróż zachowane $path
-def wyst($path): 
-    group_by(.)
-  | map({key: .[0], value: length})
+def wyst(p): 
+    group_by(p)
+  | map({key: .[0]|getpath(path(p))| (
+      if type != "string" then tostring end
+    ) , value: length})
   | sort_by(.value)
   | reverse
   | from_entries;
